@@ -3,6 +3,9 @@ package pizzaria.funcionalidades;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+import pizzaria.Pedido;
+import pizzaria.Pizza;
+
 public class Funcionalidade {
 
 	static ArrayList<String> listaIngredientes = new ArrayList<String>();
@@ -31,16 +34,13 @@ public class Funcionalidade {
 	}
 
 	public static boolean verificarEscolha(int opcao, String[] lista, int i) {
-		boolean verificacao = false;
-
 		if (opcao == 0 && lista[i - 1] != null) {
 			lista[i - 1] = null;
-			verificacao = true;
+			return true;
 
 		} else {
-			verificacao = false;
+			return false;
 		}
-		return verificacao;
 	}
 
 	public static String printarAtual(String[] lista) {
@@ -70,7 +70,7 @@ public class Funcionalidade {
 		String msg = """
 					1) Criar uma pizza
 					2) Criar um novo pedido
-					3) Preparar uma pizza
+					3) Servir um pedido
 					4) Adicionar ingredientes
 					5) Estatísticas dos pedidos
 					6) Sair do programa\n
@@ -92,15 +92,63 @@ public class Funcionalidade {
 		return msg;
 	}
 
-	public static Pizza criarPizza(String[] lista) {
+	public static Pizza prepararPizza(String[] lista) {
 		Pizza novaPizza = new Pizza();
 		novaPizza.setLista(lista);
 
 		return novaPizza;
 	}
-
-	public static void addPizza(Pizza pizza) {
-		pizzasCriadas.add(pizza);
+	
+	public static String pizzasCriadas() {
+		String msg = "Pizzas criadas: \n";
+		int num = 0;		
+		
+		for(Pizza i : pizzasCriadas) {
+			msg += "Pizza " + ++num;
+			
+			for(String s : i.getLista()) {
+				if(s != null) {
+					msg += " | " + s;
+				}	
+			}
+			msg += "\n";
+		}
+		return msg;
 	}
 
+	public static void addPizza(Pizza pizza) {
+		if(pizza != null) {
+			pizzasCriadas.add(pizza);			
+		}	
+	}
+	
+	public static void addPedido(int mesa, Pizza pizza) {
+		if(pizza != null) {
+			Pedido pedido = new Pedido();
+			String[] lista = pizza.getLista();
+			pedido.setLista(lista);
+			pedido.setMesa(mesa);
+			listaPedidos.addLast(pedido);
+		}
+	}
+	
+	public static String pedidosCriados() {
+		String msg = "Pedidos criados: \n";
+		int num = 0;		
+		
+		for(Pedido i : listaPedidos) {
+			msg += "Pedido " + ++num;
+			
+			for(String s : i.getLista()) {
+				if(s != null) {
+					msg += " | " + s;
+				}	
+			}
+			msg += " (Mesa : " + i.getMesa() + ")\n";
+		}
+		return msg;
+	}
+
+	
+	
 }
