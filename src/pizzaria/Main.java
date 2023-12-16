@@ -24,7 +24,8 @@ public class Main {
 					JOptionPane.showMessageDialog(null, Funcionalidade.pedidosCriados());
 					
 				} else if (opcao == 3) {
-
+					servirPedido();
+					
 				} else if (opcao == 4) {
 
 				} else if (opcao == 5) {
@@ -87,6 +88,11 @@ public class Main {
 			}
 		}
 		return novaPizza;
+	}
+	
+	private static void servirPedido() {
+		JOptionPane.showMessageDialog(null, Funcionalidade.testarPedido());
+		
 	}
 	
 }

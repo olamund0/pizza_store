@@ -9,7 +9,7 @@ public class Funcionalidade {
 
 	static ArrayList<String> listaIngredientes = new ArrayList<String>();
 	static ArrayDeque<Pedido> listaPedidos = new ArrayDeque<Pedido>();
-	static ArrayList<Pizza> pizzasCriadas = new ArrayList<Pizza>();
+	static ArrayList<Pizza> listaPizzas = new ArrayList<Pizza>();
 
 	public static void addIngredientes() {
 		if (listaIngredientes.isEmpty()) {
@@ -102,7 +102,7 @@ public class Funcionalidade {
 		String msg = "Pizzas criadas: \n";
 		int num = 0;		
 		
-		for(Pizza i : pizzasCriadas) {
+		for(Pizza i : listaPizzas) {
 			msg += "Pizza " + ++num;
 			
 			for(String s : i.getLista()) {
@@ -117,7 +117,7 @@ public class Funcionalidade {
 
 	public static void addPizza(Pizza pizza) {
 		if(pizza != null) {
-			pizzasCriadas.add(pizza);			
+			listaPizzas.add(pizza);			
 		}	
 	}
 	
@@ -146,6 +146,30 @@ public class Funcionalidade {
 			msg += " (Mesa : " + i.getMesa() + ")\n";
 		}
 		return msg;
+	}
+	
+	public static boolean testarPedido() {
+		Pedido pedido = listaPedidos.getFirst();
+		
+		String pedidoStr = "";
+		
+		for(String s : pedido.getLista()) {
+			pedidoStr += s + " ";
+		}
+		String pizza = "";
+		
+		for(Pizza p : listaPizzas) {
+			for(String s : p.getLista()) {
+				pizza += s + " ";
+			}
+			if(pizza.equals(pedidoStr)) {
+				return true;
+			}
+			pizza = "";
+		}
+		
+		return false;
+		
 	}
 
 	
