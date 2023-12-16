@@ -3,6 +3,7 @@ package pizzaria;
 import javax.swing.JOptionPane;
 
 import pizzaria.funcionalidades.*;
+import pizzaria.entidade.*;
 
 public class Main {
 	public static void main(String[] args) {

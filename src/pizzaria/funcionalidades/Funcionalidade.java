@@ -3,8 +3,7 @@ package pizzaria.funcionalidades;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import pizzaria.Pedido;
-import pizzaria.Pizza;
+import pizzaria.entidade.*;
 
 public class Funcionalidade {
 
