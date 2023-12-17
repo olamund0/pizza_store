@@ -91,7 +91,6 @@ public class Main {
 	}
 	
 	private static void servirPedido() {
-		JOptionPane.showMessageDialog(null, Funcionalidade.testarPedido());
 		
 	}
 	

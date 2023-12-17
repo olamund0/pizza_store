@@ -3,6 +3,8 @@ package pizzaria.funcionalidades;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import pizzaria.entidade.*;
 
 public class Funcionalidade {
@@ -97,18 +99,18 @@ public class Funcionalidade {
 
 		return novaPizza;
 	}
-	
+
 	public static String pizzasCriadas() {
 		String msg = "Pizzas criadas: \n";
-		int num = 0;		
-		
-		for(Pizza i : listaPizzas) {
+		int num = 0;
+
+		for (Pizza i : listaPizzas) {
 			msg += "Pizza " + ++num;
-			
-			for(String s : i.getLista()) {
-				if(s != null) {
+
+			for (String s : i.getLista()) {
+				if (s != null) {
 					msg += " | " + s;
-				}	
+				}
 			}
 			msg += "\n";
 		}
@@ -116,13 +118,13 @@ public class Funcionalidade {
 	}
 
 	public static void addPizza(Pizza pizza) {
-		if(pizza != null) {
-			listaPizzas.add(pizza);			
-		}	
+		if (pizza != null) {
+			listaPizzas.add(pizza);
+		}
 	}
-	
+
 	public static void addPedido(int mesa, Pizza pizza) {
-		if(pizza != null) {
+		if (pizza != null) {
 			Pedido pedido = new Pedido();
 			String[] lista = pizza.getLista();
 			pedido.setLista(lista);
@@ -130,48 +132,69 @@ public class Funcionalidade {
 			listaPedidos.addLast(pedido);
 		}
 	}
-	
+
 	public static String pedidosCriados() {
 		String msg = "Pedidos criados: \n";
-		int num = 0;		
-		
-		for(Pedido i : listaPedidos) {
+		int num = 0;
+
+		for (Pedido i : listaPedidos) {
 			msg += "Pedido " + ++num;
-			
-			for(String s : i.getLista()) {
-				if(s != null) {
+
+			for (String s : i.getLista()) {
+				if (s != null) {
 					msg += " | " + s;
-				}	
+				}
 			}
 			msg += " (Mesa : " + i.getMesa() + ")\n";
 		}
 		return msg;
 	}
-	
-	public static boolean testarPedido() {
-		Pedido pedido = listaPedidos.getFirst();
-		
-		String pedidoStr = "";
-		
-		for(String s : pedido.getLista()) {
-			pedidoStr += s + " ";
-		}
-		String pizza = "";
-		
-		for(Pizza p : listaPizzas) {
-			for(String s : p.getLista()) {
-				pizza += s + " ";
+
+	public static boolean verificarPedido(Pedido pedido) {
+		if (!listaPedidos.isEmpty()) {
+
+			pedido = listaPedidos.getFirst();
+			String pedidoStr = "";
+
+			for (String i : pedido.getLista()) {
+				pedidoStr += i;
 			}
-			if(pizza.equals(pedidoStr)) {
-				return true;
+
+			String pizza = "";
+			for (Pizza p : listaPizzas) {
+				for (String i : p.getLista()) {
+					pizza += i;
+				}
+				if (pizza.equals(pedidoStr)) {
+					pedido.getMesa();
+					listaPedidos.removeFirst();
+					listaPizzas.remove(p);
+					return true;
+
+				}
+				pizza = "";
 			}
-			pizza = "";
 		}
-		
+
 		return false;
-		
+
 	}
 
-	
-	
+	public static void pedidoServido() {
+		Pedido pedido = new Pedido();
+		int num = 0;
+
+		if (Funcionalidade.verificarPedido(pedido)) {
+			String msg = "Pedido " + ++num + " ";
+			for (String i : pedido.getLista()) {
+				if (i != null) {
+					msg += i;
+				}
+			}
+			msg += "Servido na mesa: " + pedido.getMesa();
+
+			JOptionPane.showMessageDialog(null, msg);
+		}
+	}
+
 }
