@@ -150,10 +150,10 @@ public class Funcionalidade {
 		return msg;
 	}
 
-	public static boolean verificarPedido(Pedido pedido) {
-		if (!listaPedidos.isEmpty()) {
-
-			pedido = listaPedidos.getFirst();
+	public static String verificarPedido() {
+		String msg = "";
+		if (!listaPedidos.isEmpty()) {		
+			Pedido pedido = listaPedidos.getFirst();
 			String pedidoStr = "";
 
 			for (String i : pedido.getLista()) {
@@ -166,35 +166,16 @@ public class Funcionalidade {
 					pizza += i;
 				}
 				if (pizza.equals(pedidoStr)) {
-					pedido.getMesa();
+					msg += "Pedido servido na mesa: " + pedido.getMesa();
 					listaPedidos.removeFirst();
-					listaPizzas.remove(p);
-					return true;
-
+					listaPizzas.remove(p);		
+					break;
 				}
 				pizza = "";
 			}
 		}
+		return msg;
 
-		return false;
-
-	}
-
-	public static void pedidoServido() {
-		Pedido pedido = new Pedido();
-		int num = 0;
-
-		if (Funcionalidade.verificarPedido(pedido)) {
-			String msg = "Pedido " + ++num + " ";
-			for (String i : pedido.getLista()) {
-				if (i != null) {
-					msg += i;
-				}
-			}
-			msg += "Servido na mesa: " + pedido.getMesa();
-
-			JOptionPane.showMessageDialog(null, msg);
-		}
 	}
 
 }

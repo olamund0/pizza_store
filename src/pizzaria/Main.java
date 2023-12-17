@@ -11,7 +11,7 @@ public class Main {
 		int opcao = 1;
 
 		while (opcao != 6) {
-			try {
+			//try {
 				opcao = Integer.parseInt(JOptionPane.showInputDialog(Funcionalidade.menu()));
 
 				if (opcao == 1) {
@@ -37,9 +37,9 @@ public class Main {
 					JOptionPane.showMessageDialog(null, "Opção inválida");
 				}
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Opção inválida");
-			}
+			//} catch (Exception e) {
+				//JOptionPane.showMessageDialog(null, "Opção inválida");
+			//}
 
 		}
 
@@ -91,6 +91,12 @@ public class Main {
 	}
 	
 	private static void servirPedido() {
+		String msg = Funcionalidade.verificarPedido();
+		if(!msg.equals("")) {
+			System.out.println(Funcionalidade.verificarPedido());
+		} else {
+			System.out.println("erro");
+		}
 		
 	}
 	
