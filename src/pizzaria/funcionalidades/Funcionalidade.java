@@ -3,8 +3,6 @@ package pizzaria.funcionalidades;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import pizzaria.entidade.*;
 
 public class Funcionalidade {
@@ -12,6 +10,7 @@ public class Funcionalidade {
 	static ArrayList<String> listaIngredientes = new ArrayList<String>();
 	static ArrayDeque<Pedido> listaPedidos = new ArrayDeque<Pedido>();
 	static ArrayList<Pizza> listaPizzas = new ArrayList<Pizza>();
+	static int contadorPedidosServidos = 0;
 
 	public static void addIngredientes() {
 		if (listaIngredientes.isEmpty()) {
@@ -152,26 +151,25 @@ public class Funcionalidade {
 
 	public static String verificarPedido() {
 		String msg = "";
-		if (!listaPedidos.isEmpty()) {		
-			Pedido pedido = listaPedidos.getFirst();
-			String pedidoStr = "";
-
-			for (String i : pedido.getLista()) {
-				pedidoStr += i;
-			}
-
-			String pizza = "";
-			for (Pizza p : listaPizzas) {
-				for (String i : p.getLista()) {
-					pizza += i;
+		if (!listaPedidos.isEmpty()) {
+			Pedido pedido = listaPedidos.getFirst();	
+			int num = 0;
+			
+			for(Pizza pizza : listaPizzas) {
+				num = 0;
+				for(int i = 0; i < 5; i++) {		
+					if(pizza.getLista()[i] == (pedido.getLista()[i])) {
+						num++;
+					}			
 				}
-				if (pizza.equals(pedidoStr)) {
-					msg += "Pedido servido na mesa: " + pedido.getMesa();
-					listaPedidos.removeFirst();
-					listaPizzas.remove(p);		
+				if(num == 5) {
+					contadorPedidosServidos++;
+					msg += "Pedido " +contadorPedidosServidos + 
+							"servido na mesa: " + pedido.getMesa();
+					listaPizzas.remove(pizza);
+					listaPedidos.remove(pedido);
 					break;
-				}
-				pizza = "";
+				}						
 			}
 		}
 		return msg;

@@ -27,7 +27,7 @@ public class Main {
 					servirPedido();
 					
 				} else if (opcao == 4) {
-
+					JOptionPane.showMessageDialog(null, Funcionalidade.pizzasCriadas());
 				} else if (opcao == 5) {
 
 				} else if (opcao == 6) {
@@ -93,9 +93,10 @@ public class Main {
 	private static void servirPedido() {
 		String msg = Funcionalidade.verificarPedido();
 		if(!msg.equals("")) {
-			System.out.println(Funcionalidade.verificarPedido());
+			JOptionPane.showMessageDialog(null, msg);
+		
 		} else {
-			System.out.println("erro");
+			JOptionPane.showMessageDialog(null, "Pedido não pode ser servido");
 		}
 		
 	}
