@@ -59,7 +59,7 @@ public class Funcionalidade {
 	public static boolean verificacaoIngrediente(int opcao) {
 		boolean verificar = true;
 
-		if (opcao < 0 && opcao > listaIngredientes.size()) {
+		if (opcao < 0 || opcao > listaIngredientes.size()) {
 			verificar = false;
 		}
 
@@ -164,8 +164,7 @@ public class Funcionalidade {
 				}
 				if(num == 5) {
 					contadorPedidosServidos++;
-					msg += "Pedido " +contadorPedidosServidos + 
-							"servido na mesa: " + pedido.getMesa();
+					msg += "Pedido " +contadorPedidosServidos + " servido na mesa: " + pedido.getMesa();
 					listaPizzas.remove(pizza);
 					listaPedidos.remove(pedido);
 					break;
@@ -174,6 +173,16 @@ public class Funcionalidade {
 		}
 		return msg;
 
+	}
+	
+	public static boolean novoIngrediente(String ingrediente) {
+		for(String i : listaIngredientes) {
+			if(!i.equalsIgnoreCase(ingrediente)) {
+				listaIngredientes.add(ingrediente);
+				return true;
+			}	
+		}
+		return false;
 	}
 
 }
