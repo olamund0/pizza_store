@@ -8,42 +8,38 @@ import pizzaria.entidade.*;
 public class Main {
 	public static void main(String[] args) {
 
-		int opcao = 1;
+		String opcao = "1";
 
-		while (opcao != 6) {
-			try {
+		while (!opcao.equals("6")) {
 				Funcionalidade.addIngredientes();		
 				
-				opcao = Integer.parseInt(JOptionPane.showInputDialog(null, Funcionalidade.menu(), 
-						"Pizzaria Bon Appetit", JOptionPane.QUESTION_MESSAGE));
+				opcao = JOptionPane.showInputDialog(null, Funcionalidade.menu(), 
+						"Pizzaria Bon Appetit", JOptionPane.QUESTION_MESSAGE);
 
-				if (opcao == 1) {
+				if (opcao.equals("1")) {
 					Funcionalidade.addPizza(criarPizza());
 					JOptionPane.showMessageDialog(null, Funcionalidade.pizzasCriadas());
 
-				} else if (opcao == 2) {
-					Funcionalidade.addPedido(Integer.parseInt(JOptionPane.showInputDialog(
-							null, "Digite sua mesa: ")), criarPizza());
+				} else if (opcao.equals("2")) {
+					Funcionalidade.addPedido(criarPizza(), Integer.parseInt(JOptionPane.showInputDialog(
+							null, "Digite sua mesa: ")));
 					JOptionPane.showMessageDialog(null, Funcionalidade.pedidosCriados());
 					
-				} else if (opcao == 3) {
+				} else if (opcao.equals("3")) {
 					servirPedido();
 					
-				} else if (opcao == 4) {
+				} else if (opcao.equals("4")) {
 					adicionarIngrediente();
 					
-				} else if (opcao == 5) {
+				} else if (opcao.equals("5")) {
 
-				} else if (opcao == 6) {
+				} else if (opcao.equals("6")) {
 					JOptionPane.showMessageDialog(null, "Obrigado por usar nosso sistema, volte sempre!");
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Opção inválida", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Opção inválida", "Erro", JOptionPane.ERROR_MESSAGE);
-			}
 
 		}
 
@@ -70,7 +66,7 @@ public class Main {
 				int escolha = Integer.parseInt(JOptionPane
 						.showInputDialog(Funcionalidade.printarAtual(listaStr) + Funcionalidade.mostrarIngredientes()
 								+ "Escolha um ingrediente ou digite 0 para remover o ultimo: "));
-
+						
 				if (Funcionalidade.verificarEscolha(escolha, listaStr, i)) {
 					i -= 2;
 
@@ -100,7 +96,7 @@ public class Main {
 			JOptionPane.showMessageDialog(null, msg);
 		
 		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possível servir o pedido atual da fila, crie pizza e pedido equivalentes", 
+			JOptionPane.showMessageDialog(null, "Não foi possível servir o pedido atual da fila, crie pedido e pizza equivalentes", 
 					"Message", JOptionPane.INFORMATION_MESSAGE);		
 			
 		}
