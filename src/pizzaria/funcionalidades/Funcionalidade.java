@@ -10,10 +10,8 @@ public class Funcionalidade {
 	static ArrayList<String> listaIngredientes = new ArrayList<String>();
 	static ArrayDeque<Pedido> listaPedidos = new ArrayDeque<Pedido>();
 	static ArrayList<Pizza> listaPizzas = new ArrayList<Pizza>();
-	static int pedidosServidos = 0;
 
 	public static void addIngredientes() {
-		if (listaIngredientes.isEmpty()) {
 			listaIngredientes.add("Queijo");
 			listaIngredientes.add("Cebola");
 			listaIngredientes.add("Tomate");
@@ -21,8 +19,6 @@ public class Funcionalidade {
 			listaIngredientes.add("Azeitona");
 			listaIngredientes.add("Orégano");
 			listaIngredientes.add("Pepperoni");
-
-		}
 	}
 
 	public static String escolherIngredientes(int opcao) {
@@ -129,6 +125,8 @@ public class Funcionalidade {
 			pedido.setLista(lista);
 			pedido.setMesa(mesa);
 			listaPedidos.addLast(pedido);
+			Estatistica.mediaIngredientes += lista.length;
+			Estatistica.ingredientesEscolhidos(lista);
 		}
 	}
 
@@ -163,8 +161,8 @@ public class Funcionalidade {
 					}			
 				}
 				if(num == 5) {
-					pedidosServidos++;
-					msg += "Pedido " +pedidosServidos + " servido na mesa: " + pedido.getMesa();
+					Estatistica.pedidosServidos++;
+					msg += "Pedido " + Estatistica.pedidosServidos + " servido na mesa: " + pedido.getMesa();
 					listaPizzas.remove(pizza);
 					listaPedidos.remove(pedido);
 					break;
@@ -182,6 +180,7 @@ public class Funcionalidade {
 			}
 		}
 		listaIngredientes.add(ingrediente);
+		Estatistica.estatisticas.put(ingrediente, 0);
 		return true;
 	}
 
