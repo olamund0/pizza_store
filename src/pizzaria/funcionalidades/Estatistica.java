@@ -23,11 +23,27 @@ public class Estatistica {
 	}
 	
 	public static String printarEstatisticas() {
-		String msg = "";
+		String msg = "Quantidade de pedidos servidos: " + pedidosServidos;
+		int maior = 0;
+		String naoPedido = "\nIngredientes não escolhidos (";
+		String maisPedido = "";
+		
 		for(String i : estatisticas.keySet()) {
-			msg += "\nIngrediente: " + i + " Quantidade: " + estatisticas.get(i);
+			if(estatisticas.get(i) == 0) {
+				naoPedido += i + " | ";
+			}
+			if(estatisticas.get(i) > maior) {
+				maior = estatisticas.get(i);
+				maisPedido = "\nIngrediente mais pedido (" + i;
+			}
 		}
-		return msg;
+		naoPedido += ")";
+		
+		if(maior > 0) {
+			maisPedido += " | " + maior + " Vezes)";
+		}
+		
+		return msg + naoPedido + maisPedido;
 	}
 	
 }
