@@ -6,7 +6,9 @@ public class Estatistica {
 	
 	static HashMap<String, Integer> estatisticas = new HashMap<String, Integer>();
 	static int pedidosServidos = 0;
-	static int mediaIngredientes = 0;
+	static double ingredientesporPizza = 0;
+	static int pedidosCriados = 0;
+	
 	
 	public static void ingredientesHash() {
 		for(String i : Funcionalidade.listaIngredientes) {
@@ -19,7 +21,11 @@ public class Estatistica {
 			if(estatisticas.containsKey(i)) {
 				estatisticas.put(i, estatisticas.get(i) + 1);
 			}
+			if(i != null) {
+				ingredientesporPizza++;
+			}
 		}
+		
 	}
 	
 	public static String printarEstatisticas() {
@@ -27,6 +33,7 @@ public class Estatistica {
 		int maior = 0;
 		String naoPedido = "\nIngredientes não escolhidos (";
 		String maisPedido = "";
+		String media = "";
 		
 		for(String i : estatisticas.keySet()) {
 			if(estatisticas.get(i) == 0) {
@@ -39,11 +46,12 @@ public class Estatistica {
 		}
 		naoPedido += ")";
 		
-		if(maior > 0) {
+		if(pedidosCriados > 0) {
+			media = "\nQuant. média de ingredientes por pizza: " + ingredientesporPizza/pedidosCriados;
 			maisPedido += " | " + maior + " Vezes)";
 		}
 		
-		return msg + naoPedido + maisPedido;
+		return msg + naoPedido + maisPedido + media;
 	}
 	
 }

@@ -125,8 +125,8 @@ public class Funcionalidade {
 			pedido.setLista(lista);
 			pedido.setMesa(mesa);
 			listaPedidos.addLast(pedido);
-			Estatistica.mediaIngredientes += lista.length;
 			Estatistica.ingredientesEscolhidos(lista);
+			Estatistica.pedidosCriados++;
 		}
 	}
 
