@@ -3,11 +3,9 @@ package pizzaria.entidade;
 public class Pizza {
 	private String lista[];
 	private int id;
-	private static int contador = 0;
 	
 	public Pizza() {
 		lista = new String[5];
-		id = contador++;
 	}
 
 	public String[] getLista() {
@@ -22,4 +20,7 @@ public class Pizza {
 		return id;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
 }

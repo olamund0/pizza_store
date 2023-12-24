@@ -10,6 +10,7 @@ public class Funcionalidade {
 	static ArrayList<String> listaIngredientes = new ArrayList<String>();
 	static ArrayDeque<Pedido> listaPedidos = new ArrayDeque<Pedido>();
 	static ArrayList<Pizza> listaPizzas = new ArrayList<Pizza>();
+	private static int idPizza = 0;
 
 	public static void addIngredientes() {
 			listaIngredientes.add("Queijo");
@@ -114,6 +115,7 @@ public class Funcionalidade {
 
 	public static void addPizza(Pizza pizza) {
 		if (pizza != null) {
+			pizza.setId(++idPizza);
 			listaPizzas.add(pizza);
 		}
 	}

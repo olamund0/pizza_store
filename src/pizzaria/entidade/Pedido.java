@@ -8,7 +8,7 @@ public class Pedido {
 	
 	public Pedido() {
 		lista = new String[5];
-		id = contador++;
+		id = ++contador;
 	}
 
 	public String[] getLista() {
