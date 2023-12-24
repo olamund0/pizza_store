@@ -2,7 +2,7 @@ package pizzaria.entidade;
 
 public class Pedido {
 	private String lista[];
-	private int mesa;
+	private String mesa;
 	
 	public Pedido() {
 		lista = new String[5];
@@ -16,11 +16,11 @@ public class Pedido {
 		this.lista = lista;
 	}
 
-	public int getMesa() {
+	public String getMesa() {
 		return mesa;
 	}
 
-	public void setMesa(int mesa) {
+	public void setMesa(String mesa) {
 		this.mesa = mesa;
 	}
 	

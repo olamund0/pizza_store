@@ -41,7 +41,7 @@ public class Funcionalidade {
 
 	public static String printarAtual(String[] lista) {
 
-		String msg = "Pizza atual: ";
+		String msg = "Ingredientes escolhidos: ";
 
 		for (String i : lista) {
 			if (i != null) {
@@ -68,8 +68,9 @@ public class Funcionalidade {
 					2) Criar um novo pedido
 					3) Servir um pedido
 					4) Adicionar ingredientes
-					5) Estatísticas dos pedidos
-					6) Sair do programa\n
+					5) Olhar pedidos e pizzas criados
+					6) Estatísticas dos pedidos
+					7) Sair do programa\n
 					Digite uma opção:
 				""";
 		return msg;
@@ -96,7 +97,7 @@ public class Funcionalidade {
 	}
 
 	public static String pizzasCriadas() {
-		String msg = "Pizzas criadas: \n";
+		String msg = "\nPizzas criadas: \n";
 		int num = 0;
 
 		for (Pizza i : listaPizzas) {
@@ -118,7 +119,7 @@ public class Funcionalidade {
 		}
 	}
 
-	public static void addPedido(Pizza pizza, int mesa) {
+	public static void addPedido(Pizza pizza, String mesa) {
 		if (pizza != null) {
 			Pedido pedido = new Pedido();
 			String[] lista = pizza.getLista();
@@ -162,7 +163,7 @@ public class Funcionalidade {
 				}
 				if(num == 5) {
 					Estatistica.pedidosServidos++;
-					msg += "Pedido " + Estatistica.pedidosServidos + " servido na mesa: " + pedido.getMesa();
+					msg += "Pedido " + Estatistica.pedidosCriados + " servido na mesa: " + pedido.getMesa();
 					listaPizzas.remove(pizza);
 					listaPedidos.remove(pedido);
 					break;

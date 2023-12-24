@@ -10,6 +10,11 @@ public class Estatistica {
 	static int pedidosCriados = 0;
 	
 	
+	public static int getPedidos() {
+		return pedidosCriados;
+	}
+	
+	
 	public static void ingredientesHash() {
 		for(String i : Funcionalidade.listaIngredientes) {
 			estatisticas.put(i, 0);
@@ -29,9 +34,10 @@ public class Estatistica {
 	}
 	
 	public static String printarEstatisticas() {
-		String msg = "Quantidade de pedidos servidos: " + pedidosServidos;
+		String msg = "Estatísticas dos pedidos:"
+				+ "\n\nQuantidade de pedidos servidos: " + pedidosServidos;
 		int maior = 0;
-		String naoPedido = "\nIngredientes não escolhidos (";
+		String naoPedido = "\n\nIngredientes não escolhidos: (";
 		String maisPedido = "";
 		String media = "";
 		
@@ -39,19 +45,21 @@ public class Estatistica {
 			if(estatisticas.get(i) == 0) {
 				naoPedido += i + " | ";
 			}
+			
 			if(estatisticas.get(i) > maior) {
 				maior = estatisticas.get(i);
 				maisPedido = "\nIngrediente mais pedido (" + i;
 			}
 		}
-		naoPedido += ")";
+		naoPedido+= ")";
 		
 		if(pedidosCriados > 0) {
 			media = "\nQuant. média de ingredientes por pizza: " + ingredientesporPizza/pedidosCriados;
 			maisPedido += " | " + maior + " Vezes)";
 		}
+		msg += maisPedido + media + naoPedido;
 		
-		return msg + naoPedido + maisPedido + media;
+		return msg;
 	}
 	
 }
