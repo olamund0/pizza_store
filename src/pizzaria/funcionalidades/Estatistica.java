@@ -14,7 +14,6 @@ public class Estatistica {
 		return pedidosCriados;
 	}
 	
-	
 	public static void ingredientesHash() {
 		for(String i : Funcionalidade.listaIngredientes) {
 			estatisticas.put(i, 0);

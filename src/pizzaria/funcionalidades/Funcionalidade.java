@@ -68,7 +68,7 @@ public class Funcionalidade {
 					2) Criar um novo pedido
 					3) Servir um pedido
 					4) Adicionar ingredientes
-					5) Olhar pedidos e pizzas criados
+					5) Olhar pedidos e pizzas atuais
 					6) Estatísticas dos pedidos
 					7) Sair do programa\n
 					Digite uma opção:
@@ -97,11 +97,10 @@ public class Funcionalidade {
 	}
 
 	public static String pizzasCriadas() {
-		String msg = "\nPizzas criadas: \n";
-		int num = 0;
+		String msg = "\nPizzas: \n";
 
 		for (Pizza i : listaPizzas) {
-			msg += "Pizza " + ++num;
+			msg += "Pizza " + i.getId();
 
 			for (String s : i.getLista()) {
 				if (s != null) {
@@ -132,11 +131,10 @@ public class Funcionalidade {
 	}
 
 	public static String pedidosCriados() {
-		String msg = "Pedidos criados: \n";
-		int num = 0;
+		String msg = "Pedidos: \n";
 
 		for (Pedido i : listaPedidos) {
-			msg += "Pedido " + ++num;
+			msg += "Pedido " + i.getId();
 
 			for (String s : i.getLista()) {
 				if (s != null) {
@@ -163,7 +161,7 @@ public class Funcionalidade {
 				}
 				if(num == 5) {
 					Estatistica.pedidosServidos++;
-					msg += "Pedido " + Estatistica.pedidosCriados + " servido na mesa: " + pedido.getMesa();
+					msg += "Pedido " + pedido.getId() + " servido na mesa: " + pedido.getMesa();
 					listaPizzas.remove(pizza);
 					listaPedidos.remove(pedido);
 					break;

@@ -78,8 +78,6 @@ public class Main {
 
 						if (i == quantidade - 1) {
 							novaPizza = Funcionalidade.prepararPizza(listaStr);
-							JOptionPane.showMessageDialog(null, Funcionalidade.printarAtual(listaStr));
-
 						}
 
 					} else {
