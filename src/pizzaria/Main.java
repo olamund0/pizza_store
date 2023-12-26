@@ -61,8 +61,11 @@ public class Main {
 				i -= 2;
 
 			} else {
-				if (escolha.equals("")) {
-					novaPizza = Funcionalidade.prepararPizza(listaStr);
+				if (escolha == null || escolha.equals("")) {
+					
+					if(escolha != null) {
+						novaPizza = Funcionalidade.prepararPizza(listaStr);						
+					}
 					break;
 				}
 

@@ -35,7 +35,7 @@ public class Funcionalidade {
 	}
 
 	public static boolean verificarEscolha(String opcao, String[] lista, int i) {
-		if (!opcao.equals("0")) {
+		if (opcao == null || !opcao.equals("0")) {
 			return false;
 		}
 
