@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		Funcionalidade.addIngredientes();
 		Estatistica.ingredientesHash();
-		
+
 		String opcao = "1";
 
 		while (!opcao.equals("7")) {
@@ -21,9 +21,8 @@ public class Main {
 				Funcionalidade.addPizza(criarPizza());
 
 			} else if (opcao.equals("2")) {
-				Funcionalidade.addPedido(criarPizza(),
-						JOptionPane.showInputDialog(null, "Digite sua mesa: "));
-				
+				Funcionalidade.addPedido(criarPizza(), JOptionPane.showInputDialog(null, "Digite sua mesa: "));
+
 			} else if (opcao.equals("3")) {
 				servirPedido();
 
@@ -35,8 +34,8 @@ public class Main {
 
 			} else if (opcao.equals("6")) {
 				JOptionPane.showMessageDialog(null, Estatistica.printarEstatisticas(), "Estatísticas dos pedidos", 1);
-				
-			} else if(opcao.equals("7")) {
+
+			} else if (opcao.equals("7")) {
 				JOptionPane.showMessageDialog(null, "Obrigado por usar nosso sistema, volte sempre!");
 			} else {
 				JOptionPane.showMessageDialog(null, "Opção inválida", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -48,45 +47,36 @@ public class Main {
 
 	private static Pizza criarPizza() {
 
-		int quantidade = Integer.parseInt(
-				JOptionPane.showInputDialog(null, "Deseja uma pizza com quantos ingredientes? Escolha até 5"));
-
 		Pizza novaPizza = null;
 
-		if (quantidade < 1 || quantidade > 5) {
-			JOptionPane.showMessageDialog(null, "Quantidade inválida");
+		String[] listaStr = new String[5];
 
-		} else {
+		for (int i = 0; i < 5; i++) {
 
-			String[] listaStr = new String[5];
+			String escolha = JOptionPane
+					.showInputDialog(Funcionalidade.printarAtual(listaStr) + Funcionalidade.mostrarIngredientes()
+							+ "\nSua pizza pode ter até 5 ingredientes, aperte OK para concluir a pizza"
+							+ "\nEscolha um ingrediente ou digite 0 para remover o ultimo:");
+			if (Funcionalidade.verificarEscolha(escolha, listaStr, i)) {
+				i -= 2;
 
-			int i = 0;
+			} else {
+				if (escolha.equals("")) {
+					novaPizza = Funcionalidade.prepararPizza(listaStr);
+					break;
+				}
 
-			for (; i < quantidade; i++) {
+				if (Funcionalidade.verificacaoIngrediente(escolha)) {
+					listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
 
-				int escolha = Integer.parseInt(JOptionPane
-						.showInputDialog(Funcionalidade.printarAtual(listaStr) + Funcionalidade.mostrarIngredientes()
-								+ "Escolha um ingrediente ou digite 0 para remover o ultimo: "));
-
-				if (Funcionalidade.verificarEscolha(escolha, listaStr, i)) {
-					i -= 2;
 
 				} else {
-
-					if (Funcionalidade.verificacaoIngrediente(escolha)) {
-						listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
-
-						if (i == quantidade - 1) {
-							novaPizza = Funcionalidade.prepararPizza(listaStr);
-						}
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Ingrediente inválido", "Erro", JOptionPane.ERROR_MESSAGE);
-						i--;
-					}
+					JOptionPane.showMessageDialog(null, "Opção inválida", "Erro", JOptionPane.ERROR_MESSAGE);
+					i--;
 				}
 			}
 		}
+
 		return novaPizza;
 	}
 
@@ -96,12 +86,12 @@ public class Main {
 			JOptionPane.showMessageDialog(null, msg);
 
 		} else {
-			if(Estatistica.getPedidos() == 0) {
+			if (Funcionalidade.sizePedidos() == 0) {
 				JOptionPane.showMessageDialog(null, "Crie pedidos para servir");
 			} else {
 				JOptionPane.showMessageDialog(null,
 						"Não foi possível servir o pedido atual da fila, cadastre pizza equivalente", "Message",
-						JOptionPane.INFORMATION_MESSAGE);		
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 
 		}

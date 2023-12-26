@@ -12,32 +12,39 @@ public class Funcionalidade {
 	static ArrayList<Pizza> listaPizzas = new ArrayList<Pizza>();
 	private static int idPizza = 0;
 
-	public static void addIngredientes() {
-			listaIngredientes.add("Queijo");
-			listaIngredientes.add("Cebola");
-			listaIngredientes.add("Tomate");
-			listaIngredientes.add("Calabresa");
-			listaIngredientes.add("Azeitona");
-			listaIngredientes.add("Orégano");
-			listaIngredientes.add("Pepperoni");
+	public static int sizePedidos() {
+		return listaPedidos.size();
 	}
 
-	public static String escolherIngredientes(int opcao) {
+	public static void addIngredientes() {
+		listaIngredientes.add("Queijo");
+		listaIngredientes.add("Cebola");
+		listaIngredientes.add("Tomate");
+		listaIngredientes.add("Calabresa");
+		listaIngredientes.add("Azeitona");
+		listaIngredientes.add("Orégano");
+		listaIngredientes.add("Pepperoni");
+	}
+
+	public static String escolherIngredientes(String opcao) {
 		String ingrediente = null;
 		if (verificacaoIngrediente(opcao)) {
-			ingrediente = listaIngredientes.get(opcao - 1);
+			ingrediente = listaIngredientes.get(Integer.parseInt(opcao) - 1);
 		}
 		return ingrediente;
 	}
 
-	public static boolean verificarEscolha(int opcao, String[] lista, int i) {
-		if (opcao == 0 && lista[i - 1] != null) {
+	public static boolean verificarEscolha(String opcao, String[] lista, int i) {
+		if (!opcao.equals("0")) {
+			return false;
+		}
+
+		if (Integer.parseInt(opcao) == 0 && i >= 1) {
 			lista[i - 1] = null;
 			return true;
 
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	public static String printarAtual(String[] lista) {
@@ -53,10 +60,17 @@ public class Funcionalidade {
 		return msg;
 	}
 
-	public static boolean verificacaoIngrediente(int opcao) {
-		boolean verificar = true;
+	public static boolean verificacaoIngrediente(String opcao) {
+		boolean verificar = false;
 
-		if (opcao < 0 || opcao > listaIngredientes.size()) {
+		try {
+			int opcaoInt = Integer.parseInt(opcao);
+
+			if (opcaoInt > 0 && opcaoInt <= listaIngredientes.size()) {
+				verificar = true;
+			}
+
+		} catch (Exception e) {
 			verificar = false;
 		}
 
@@ -91,9 +105,12 @@ public class Funcionalidade {
 	}
 
 	public static Pizza prepararPizza(String[] lista) {
-		Pizza novaPizza = new Pizza();
-		novaPizza.setLista(lista);
+		Pizza novaPizza = null;
 
+		if (lista[0] != null) {
+			novaPizza = new Pizza();
+			novaPizza.setLista(lista);
+		}
 		return novaPizza;
 	}
 
@@ -151,32 +168,32 @@ public class Funcionalidade {
 	public static String verificarPedido() {
 		String msg = "";
 		if (!listaPedidos.isEmpty()) {
-			Pedido pedido = listaPedidos.getFirst();	
+			Pedido pedido = listaPedidos.getFirst();
 			int num = 0;
-			
-			for(Pizza pizza : listaPizzas) {
+
+			for (Pizza pizza : listaPizzas) {
 				num = 0;
-				for(int i = 0; i < 5; i++) {		
-					if(pizza.getLista()[i] == (pedido.getLista()[i])) {
+				for (int i = 0; i < 5; i++) {
+					if (pizza.getLista()[i] == (pedido.getLista()[i])) {
 						num++;
-					}			
+					}
 				}
-				if(num == 5) {
+				if (num == 5) {
 					Estatistica.pedidosServidos++;
 					msg += "Pedido " + pedido.getId() + " servido na mesa: " + pedido.getMesa();
 					listaPizzas.remove(pizza);
 					listaPedidos.remove(pedido);
 					break;
-				}						
+				}
 			}
 		}
 		return msg;
 
 	}
-	
+
 	public static boolean novoIngrediente(String ingrediente) {
-		for(String i : listaIngredientes) {
-			if(i.equalsIgnoreCase(ingrediente.replace(" ", ""))) {
+		for (String i : listaIngredientes) {
+			if (i.equalsIgnoreCase(ingrediente.replace(" ", ""))) {
 				return false;
 			}
 		}
