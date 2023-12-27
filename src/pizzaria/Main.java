@@ -18,7 +18,6 @@ public class Main {
 					JOptionPane.QUESTION_MESSAGE);
 			
 			if(opcao == null) {
-				JOptionPane.showMessageDialog(null, "Obrigado por usar nosso sistema, volte sempre!");
 				break;
 			
 			} else if (opcao.equals("1")) {
@@ -70,8 +69,7 @@ public class Main {
 			} else {			
 				if(escolha.equals("") || i == 4) {
 					novaPizza = Funcionalidade.prepararPizza(listaStr);	
-					i = 4;
-					continue;
+					break;
 				}	
 				if (Funcionalidade.verificacaoIngrediente(escolha)) {
 					listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
