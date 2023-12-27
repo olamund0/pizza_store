@@ -38,7 +38,6 @@ public class Funcionalidade {
 		if (opcao == null || !opcao.equals("0")) {
 			return false;
 		}
-
 		if (i >= 1) {
 			lista[i - 1] = null;
 			return true;
@@ -55,7 +54,6 @@ public class Funcionalidade {
 			if (i != null) {
 				msg += i + " | ";
 			}
-
 		}
 		return msg;
 	}
@@ -73,7 +71,6 @@ public class Funcionalidade {
 		} catch (Exception e) {
 			verificar = false;
 		}
-
 		return verificar;
 	}
 
@@ -93,7 +90,6 @@ public class Funcionalidade {
 
 	public static String mostrarIngredientes() {
 		String msg = "\nIngredientes: \n";
-
 		int num = 1;
 
 		for (String i : listaIngredientes) {

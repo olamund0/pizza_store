@@ -56,22 +56,23 @@ public class Main {
 		String[] listaStr = new String[5];
 
 		for (int i = 0; i < 5; i++) {
-
 			String escolha = JOptionPane
 					.showInputDialog(Funcionalidade.printarAtual(listaStr) + Funcionalidade.mostrarIngredientes()
 							+ "\nSua pizza pode ter até 5 ingredientes, aperte OK para concluir a pizza"
 							+ "\nEscolha um ingrediente ou digite 0 para remover o ultimo:");
+			
+			if (escolha == null) {
+				break;
+			}			
 			if (Funcionalidade.verificarEscolha(escolha, listaStr, i)) {
 				i -= 2;
 
-			} else {
-				if (escolha == null || escolha.equals("")) {					
-					if(escolha != null) {
-						novaPizza = Funcionalidade.prepararPizza(listaStr);						
-					}
-					break;
-				}
-
+			} else {			
+				if(escolha.equals("") || i == 4) {
+					novaPizza = Funcionalidade.prepararPizza(listaStr);	
+					i = 4;
+					continue;
+				}	
 				if (Funcionalidade.verificacaoIngrediente(escolha)) {
 					listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
 
@@ -81,7 +82,6 @@ public class Main {
 				}
 			}
 		}
-
 		return novaPizza;
 	}
 

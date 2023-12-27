@@ -52,7 +52,7 @@ public class Estatistica {
 		naoPedido+= ")";
 		
 		if(pedidosCriados > 0) {
-			media = "\nQuant. média de ingredientes por pizza: " + ingredientesporPizza/pedidosCriados;
+			media = String.format("\nQuant. média de ingredientes por pizza: %.1f", ingredientesporPizza/pedidosCriados);
 			maisPedido += " | " + maior + " Vezes)";
 		}
 		msg += maisPedido + media + naoPedido;
