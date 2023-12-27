@@ -39,7 +39,7 @@ public class Funcionalidade {
 			return false;
 		}
 
-		if (Integer.parseInt(opcao) == 0 && i >= 1) {
+		if (i >= 1) {
 			lista[i - 1] = null;
 			return true;
 
@@ -194,6 +194,9 @@ public class Funcionalidade {
 	public static boolean novoIngrediente(String ingrediente) {
 		for (String i : listaIngredientes) {
 			if (i.equalsIgnoreCase(ingrediente.replace(" ", ""))) {
+				return false;
+			
+			} if(ingrediente.equals(ingrediente.replace(" ", ""))) {
 				return false;
 			}
 		}

@@ -16,8 +16,12 @@ public class Main {
 
 			opcao = JOptionPane.showInputDialog(null, Funcionalidade.menu(), "Pizzaria Bon Appetit",
 					JOptionPane.QUESTION_MESSAGE);
-
-			if (opcao.equals("1")) {
+			
+			if(opcao == null) {
+				JOptionPane.showMessageDialog(null, "Obrigado por usar nosso sistema, volte sempre!");
+				break;
+			
+			} else if (opcao.equals("1")) {
 				Funcionalidade.addPizza(criarPizza());
 
 			} else if (opcao.equals("2")) {
@@ -61,8 +65,7 @@ public class Main {
 				i -= 2;
 
 			} else {
-				if (escolha == null || escolha.equals("")) {
-					
+				if (escolha == null || escolha.equals("")) {					
 					if(escolha != null) {
 						novaPizza = Funcionalidade.prepararPizza(listaStr);						
 					}
@@ -71,7 +74,6 @@ public class Main {
 
 				if (Funcionalidade.verificacaoIngrediente(escolha)) {
 					listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
-
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Opção inválida", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -103,7 +105,10 @@ public class Main {
 
 	private static void adicionarIngrediente() {
 		String ingrediente = JOptionPane.showInputDialog(null, "Digite o novo ingrediente: ");
-
+		
+		if(ingrediente == null) {
+			return;
+		}
 		if (Funcionalidade.novoIngrediente(ingrediente)) {
 			JOptionPane.showMessageDialog(null, "Ingrediente adicionado com sucesso");
 
