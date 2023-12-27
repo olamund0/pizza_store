@@ -35,10 +35,7 @@ public class Funcionalidade {
 	}
 
 	public static boolean verificarEscolha(String opcao, String[] lista, int i) {
-		if (opcao == null || !opcao.equals("0")) {
-			return false;
-		}
-		if (i >= 1) {
+		if (opcao.equals("0") && i >= 1) {
 			lista[i - 1] = null;
 			return true;
 
@@ -47,7 +44,6 @@ public class Funcionalidade {
 	}
 
 	public static String printarAtual(String[] lista) {
-
 		String msg = "Ingredientes escolhidos: ";
 
 		for (String i : lista) {
@@ -60,7 +56,7 @@ public class Funcionalidade {
 
 	public static boolean verificacaoIngrediente(String opcao) {
 		boolean verificar = false;
-
+		
 		try {
 			int opcaoInt = Integer.parseInt(opcao);
 
@@ -91,7 +87,7 @@ public class Funcionalidade {
 	public static String mostrarIngredientes() {
 		String msg = "\nIngredientes: \n";
 		int num = 1;
-
+		
 		for (String i : listaIngredientes) {
 			msg += num + ") " + i + "\n";
 			num++;
@@ -112,7 +108,7 @@ public class Funcionalidade {
 
 	public static String pizzasCriadas() {
 		String msg = "\nPizzas: \n";
-
+		
 		for (Pizza i : listaPizzas) {
 			msg += "Pizza " + i.getId();
 
