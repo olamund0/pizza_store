@@ -194,11 +194,8 @@ public class Funcionalidade {
 	public static boolean novoIngrediente(String ingrediente) {
 		for (String i : listaIngredientes) {
 			if (i.equalsIgnoreCase(ingrediente.replace(" ", ""))) {
-				return false;
-			
-			} if(ingrediente.equals(ingrediente.replace(" ", ""))) {
-				return false;
-			}
+				return false;		
+			} 
 		}
 		listaIngredientes.add(ingrediente);
 		Estatistica.estatisticas.put(ingrediente, 0);
