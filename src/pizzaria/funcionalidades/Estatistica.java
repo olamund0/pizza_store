@@ -9,10 +9,6 @@ public class Estatistica {
 	static double ingredientesporPizza = 0;
 	static int pedidosCriados = 0;
 	
-	public static int getPedidos() {
-		return pedidosCriados;
-	}
-	
 	public static void ingredientesHash() {
 		for(String i : Funcionalidade.listaIngredientes) {
 			estatisticas.put(i, 0);

@@ -16,10 +16,10 @@ public class Main {
 
 			opcao = JOptionPane.showInputDialog(null, Funcionalidade.menu(), "Pizzaria Bon Appetit",
 					JOptionPane.QUESTION_MESSAGE);
-			
-			if(opcao == null) {
+
+			if (opcao == null) {
 				break;
-			
+
 			} else if (opcao.equals("1")) {
 				Funcionalidade.addPizza(criarPizza());
 
@@ -49,7 +49,6 @@ public class Main {
 	}
 
 	private static Pizza criarPizza() {
-
 		Pizza novaPizza = null;
 
 		String[] listaStr = new String[5];
@@ -59,22 +58,25 @@ public class Main {
 					.showInputDialog(Funcionalidade.printarAtual(listaStr) + Funcionalidade.mostrarIngredientes()
 							+ "\nSua pizza pode ter até 5 ingredientes, aperte OK para concluir a pizza"
 							+ "\nEscolha um ingrediente ou digite 0 para remover o ultimo:");
-			
+
 			if (escolha == null) {
 				break;
-			}			
+			}
 			if (Funcionalidade.verificarEscolha(escolha, listaStr, i)) {
 				i -= 2;
 
-			} else {			
-				if(escolha.equals("") || i == 4) {
+			} else {
+				if (escolha.equals("")) {
 					novaPizza = Funcionalidade.prepararPizza(listaStr);
-					if(escolha.equals("")) {
-						break;
-					}
-				}	
+					break;
+				}
+				
 				if (Funcionalidade.verificacaoIngrediente(escolha)) {
 					listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
+
+					if (i == 4) {
+						novaPizza = Funcionalidade.prepararPizza(listaStr);
+					}
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Opção inválida", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -105,8 +107,8 @@ public class Main {
 
 	private static void adicionarIngrediente() {
 		String ingrediente = JOptionPane.showInputDialog(null, "Digite o novo ingrediente: ");
-		
-		if(ingrediente == null) {
+
+		if (ingrediente == null) {
 			return;
 		}
 		if (Funcionalidade.novoIngrediente(ingrediente)) {
