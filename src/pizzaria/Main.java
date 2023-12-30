@@ -68,8 +68,10 @@ public class Main {
 
 			} else {			
 				if(escolha.equals("") || i == 4) {
-					novaPizza = Funcionalidade.prepararPizza(listaStr);	
-					break;
+					novaPizza = Funcionalidade.prepararPizza(listaStr);
+					if(escolha.equals("")) {
+						break;
+					}
 				}	
 				if (Funcionalidade.verificacaoIngrediente(escolha)) {
 					listaStr[i] = Funcionalidade.escolherIngredientes(escolha);
