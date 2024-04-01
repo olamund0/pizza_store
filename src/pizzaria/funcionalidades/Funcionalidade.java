@@ -2,6 +2,7 @@ package pizzaria.funcionalidades;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import pizzaria.entidade.*;
 
@@ -56,7 +57,7 @@ public class Funcionalidade {
 
 	public static boolean verificacaoIngrediente(String opcao) {
 		boolean verificar = false;
-		
+
 		try {
 			int opcaoInt = Integer.parseInt(opcao);
 
@@ -87,7 +88,7 @@ public class Funcionalidade {
 	public static String mostrarIngredientes() {
 		String msg = "\nIngredientes: \n";
 		int num = 1;
-		
+
 		for (String i : listaIngredientes) {
 			msg += num + ") " + i + "\n";
 			num++;
@@ -108,7 +109,7 @@ public class Funcionalidade {
 
 	public static String pizzasCriadas() {
 		String msg = "\nPizzas: \n";
-		
+
 		for (Pizza i : listaPizzas) {
 			msg += "Pizza " + i.getId();
 
@@ -160,24 +161,19 @@ public class Funcionalidade {
 	public static String verificarPedido() {
 		String msg = "";
 		if (!listaPedidos.isEmpty()) {
-			Pedido pedido = listaPedidos.getFirst();
-			int num = 0;
 
-			for (Pizza pizza : listaPizzas) {
-				num = 0;
-				for (int i = 0; i < 5; i++) {
-					if (pizza.getLista()[i] == (pedido.getLista()[i])) {
-						num++;
-					}
-				}
-				if (num == 5) {
+			Pedido pedido = listaPedidos.getFirst();
+
+			for (Pizza p : listaPizzas) {
+				if (Arrays.equals(pedido.getLista(), p.getLista())) {
 					Estatistica.pedidosServidos++;
 					msg += "Pedido " + pedido.getId() + " servido na mesa: " + pedido.getMesa();
-					listaPizzas.remove(pizza);
+					listaPizzas.remove(p);
 					listaPedidos.remove(pedido);
 					break;
 				}
 			}
+
 		}
 		return msg;
 
@@ -186,8 +182,8 @@ public class Funcionalidade {
 	public static boolean novoIngrediente(String ingrediente) {
 		for (String i : listaIngredientes) {
 			if (i.equalsIgnoreCase(ingrediente.replace(" ", ""))) {
-				return false;		
-			} 
+				return false;
+			}
 		}
 		listaIngredientes.add(ingrediente);
 		Estatistica.estatisticas.put(ingrediente, 0);
